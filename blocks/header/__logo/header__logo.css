@@ -1,0 +1,20 @@
+.header__logo {
+  width: 142px;
+  height: 32px;
+  color: #fff;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.header__logo:hover {
+  opacity: 0.6;
+  animation-fill-mode: forwards;
+}
+
+@media screen and (max-width: 890px) {
+  .header__logo {
+    width: 104px;
+    height: 24px;
+    margin-left: 27px;
+  }
+}

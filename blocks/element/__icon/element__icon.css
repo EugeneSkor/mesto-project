@@ -1,0 +1,11 @@
+.element__icon {
+  margin: 30px 20px;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.element__icon:hover {
+  opacity: 0.5;
+  animation-fill-mode: forwards;
+  cursor: pointer;
+}

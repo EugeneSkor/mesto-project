@@ -1,0 +1,12 @@
+.profile__button-edit {
+  align-self: end;
+  margin-bottom: 8px;
+}
+
+@media screen and (max-width: 890px) {
+  .profile__button-edit {
+    position: absolute;
+    top: 7px;
+    right: -28px;
+  }
+}

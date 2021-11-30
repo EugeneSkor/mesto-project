@@ -1,0 +1,9 @@
+.element__image {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  border-radius: 10px 10px 0px 0px;
+}
