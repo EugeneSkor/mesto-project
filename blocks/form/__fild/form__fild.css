@@ -19,7 +19,7 @@
   margin-top: 30px;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 900px) {
   .form__fild {
     margin-top: 75px;
     width: 238px;

@@ -3,7 +3,7 @@
   margin-bottom: 8px;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 900px) {
   .profile__button-edit {
     position: absolute;
     top: 7px;

@@ -9,9 +9,17 @@
   font-size: 18px;
   line-height: 1.22;
   font-weight: 400;
+  opacity: 1;
+  transition: opacity 0.3s ease;
 }
 
-@media screen and (max-width: 890px) {
+.form__button:hover {
+  opacity: 0.8;
+  animation-fill-mode: forwards;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
   .form__button {
     margin: 45px auto 0 auto;
     width: 238px;

@@ -1,11 +1,22 @@
 .popup {
-  position: absolute;
-  top: 0px;
-  left: 0px;
+  position: fixed;
   display: none;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  z-index: 1;
+  align-items:center;
+  justify-content:center;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+}
+
+.popup::after{
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+  z-index: 2;
 }

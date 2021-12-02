@@ -4,9 +4,10 @@
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   grid-template-rows: repeat(2, minmax(min-content, max-content));
   gap: 16px 18px;
+  z-index: -1;
 }
 
-@media screen and (max-width: 890px) {
+@media screen and (max-width: 900px) {
   .profile__info {
     margin-top: 26px;
     grid-template-columns: minmax(min-content, max-content);

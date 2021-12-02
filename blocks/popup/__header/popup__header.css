@@ -1,5 +1,5 @@
-.form__header {
-  margin: 0;
+.popup__header {
+  margin: 0 auto;
   margin-block: 0;
   margin-top: 34px;
   margin-left: 36px;
@@ -9,8 +9,8 @@
   color: #000;
 }
 
-@media screen and (max-width: 890px) {
-  .form__header {
+@media screen and (max-width: 900px) {
+  .popup__header {
     font-size: 18px;
     line-height: 1.22;
     margin: 25px auto 0 auto;
