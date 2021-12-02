@@ -8,4 +8,4 @@
 
 В проекте используется технология флексбокс и грид-вёрстки, учтены основы семантики HTML, реализованы блоки в состоянии hover.
 
-* [Ссылка на GitHub Pages](https://EugeneSkor.github.io/mesto-project/index.html)
+* [Ссылка на GitHub Pages](https://EugeneSkor.github.io/mesto-project/)
