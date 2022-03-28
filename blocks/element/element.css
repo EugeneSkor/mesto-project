@@ -1,8 +1,6 @@
 .element {
  display: grid;
- position: relative;
  width: 282px;
- min-height: 361px;
  background-color: #fff;
  grid-template-columns: 220px 62px;
  grid-template-rows: 282px 80px;

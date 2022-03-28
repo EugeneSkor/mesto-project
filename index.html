@@ -11,19 +11,6 @@
   <title>Mesto Russia</title>
 </head>
 <body class="page">
-  <section class="popup">
-    <div class="popup__container">
-      <h2 class="popup__header">Редактировать профиль</h2>
-      <button class="button popup__close" type="button"></button>
-    <form class="form" name="userdata">
-      <fieldset class="form__fildset">
-        <input type="text" class="form__fild form__fild-name" name ="name" value="Жак-Ив Кусто" placeholder="Имя">
-        <input type="text" class="form__fild form__fild-about" name ="about" value="Исследователь океана" placeholder="О себе">
-      </fieldset>
-      <button type="submit" class="button form__button">Сохранить</button>
-    </form>
-    </div>
-  </section>
   <header class="header">
     <a href="#" class="header__logo"><img class="header__logo-image" src="./images/header/logo.svg" alt="Логотип Mesto"></a>
   </header>
@@ -77,6 +64,19 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022. Mesto Russia</p>
   </footer>
+  <div class="popup">
+    <div class="popup__container">
+      <h2 class="popup__header">Редактировать профиль</h2>
+      <button class="button popup__close" type="button"></button>
+      <form class="form" name="userdata">
+        <fieldset class="form__fildset">
+          <input type="text" class="form__fild form__fild_name" name ="name" value="" placeholder="Имя">
+          <input type="text" class="form__fild form__fild_about" name ="about" value="" placeholder="О себе">
+        </fieldset>
+        <button type="submit" class="button form__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
   <script src="./scripts/index.js"></script>
 </body>
 </html>
