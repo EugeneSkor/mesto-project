@@ -13,8 +13,8 @@ let closePopupButton = popupContainer.querySelector('.popup__close');
 
 let formElement = popup.querySelector('.form');
 let formFildset = formElement.querySelector('.form__fildset');
-let nameInput = formFildset.querySelector('.form__fild_name');
-let jobInput = formFildset.querySelector('.form__fild_about');
+let nameInput = formFildset.querySelector('#formFildName');
+let jobInput = formFildset.querySelector('#formFildAbout');
 
 function openPopup() {
   popup.classList.add('popup_opened');
