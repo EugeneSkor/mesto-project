@@ -60,16 +60,21 @@
       </form>
     </div>
   </div>
-
+  <div class="popup popup_dark" id="popupCardPhoto">
+    <div class="popup__photoframe">
+      <button class="button popup__close" type="button"></button>
+      <img class="popup__photo" src="" alt="Фотография">
+      <h2 class="popup__description">Уточки</h2>
+    </div>
+  </div>
   <template id="element">
     <li class="element">
       <button class="button element__basket" type="button"><img src="./images/elements/basket.svg" alt="Удалить"></button>
       <img class="element__image" src="" alt="Фотография">
       <h2 class="element__title"></h2>
-      <button class="button element__icon" type="button"><img src="./images/elements/heart_disabled.svg" alt="Лайк"></button>
+      <button class="button element__icon" type="button"></button>
     </li>
   </template>
-
   <script src="./scripts/index.js"></script>
 </body>
 </html>

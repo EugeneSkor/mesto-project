@@ -2,6 +2,7 @@
   margin: 30px 20px;
   opacity: 1;
   transition: opacity 0.3s ease;
+  background: url(../../../images/elements/heart_disabled.svg) center no-repeat;
 }
 
 .element__icon:hover {

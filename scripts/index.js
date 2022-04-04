@@ -29,35 +29,35 @@ const initialCards = [
 
 // User info popup
 
-let page = document.querySelector('.page');
-let content = page.querySelector('.content');
-let profile = content.querySelector('.profile');
-let profileContainer = content.querySelector('.profile__container');
-let profileInfo = profileContainer.querySelector('.profile__info');
-let profileName = profileInfo.querySelector('.profile__name');
-let profileDescription = profileInfo.querySelector('.profile__description');
-let editButton = profileContainer.querySelector('.profile__button-edit');
+const page = document.querySelector('.page');
+const content = page.querySelector('.content');
+const profile = content.querySelector('.profile');
+const profileContainer = content.querySelector('.profile__container');
+const profileInfo = profileContainer.querySelector('.profile__info');
+const profileName = profileInfo.querySelector('.profile__name');
+const profileDescription = profileInfo.querySelector('.profile__description');
+const editButton = profileContainer.querySelector('.profile__button-edit');
 
-let profilePopup = page.querySelector('#popupUserInfo');
-let popupContainer = profilePopup.querySelector('.popup__container');
-let closePopupButton = popupContainer.querySelector('.popup__close');
+const profilePopup = page.querySelector('#popupUserInfo');
+const popupContainer = profilePopup.querySelector('.popup__container');
+const closePopupButton = popupContainer.querySelector('.popup__close');
 
-let formElement = profilePopup.querySelector('.form');
-let formFildset = formElement.querySelector('.form__fildset');
-let nameInput = formFildset.querySelector('#formFildName');
-let jobInput = formFildset.querySelector('#formFildAbout');
+const formElement = profilePopup.querySelector('.form');
+const formFildset = formElement.querySelector('.form__fildset');
+const nameInput = formFildset.querySelector('#formFildName');
+const jobInput = formFildset.querySelector('#formFildAbout');
 
 // Render cards
 
-let cardTemplate = page.querySelector('#element').content;
-let elements = content.querySelector('.elements');
-let cardElements = document.querySelector('.elements__grid');
+const cardTemplate = page.querySelector('#element').content;
+const elements = content.querySelector('.elements');
+const cardElements = document.querySelector('.elements__grid');
 
 // перебираем каждый элемент массива с информацией о карточках
 initialCards.forEach(function (card) {
 
 // клонируем содержимое тега template
-let cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
 // наполняем содержимым
 cardElement.querySelector('.element__image').src = card.link;
@@ -66,19 +66,55 @@ cardElement.querySelector('.element__title').textContent = card.name;
 
 // отображаем на странице
 cardElements.append(cardElement);
+
+// Like
+cardElement.querySelector('.element__icon').addEventListener('click', function (evt) {
+  evt.target.classList.toggle('element__icon_active');
+});
+
+// Delete card
+const deleteButton = cardElement.querySelector('.element__basket');
+
+deleteButton.addEventListener('click', function () {
+  const listItem = deleteButton.closest('.element');
+  listItem.remove();
+});
+
+// For photo popup
+
+const popupCardPhoto = page.querySelector('#popupCardPhoto');
+const popupPhotoframe = popupCardPhoto.querySelector('.popup__photoframe');
+const closePhotoframe = popupPhotoframe.querySelector('.popup__close');
+const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
+const popupDescription = popupPhotoframe.querySelector('.popup__description');
+
+// open photo popup
+cardElement.addEventListener('click', function () {
+  popupPhoto.src = cardElement.querySelector('.element__image').src
+  popupDescription.textContent = cardElement.querySelector('.element__title').textContent;
+  popupCardPhoto.classList.add('popup_opened');
+});
+
+// close photo popup
+closePhotoframe.addEventListener('click', function () {
+  popupCardPhoto.classList.remove('popup_opened');
+  popupPhoto.src = ''
+  popupDescription.textContent = '';
+});
+
 });
 
 // For new card popup
 
-let newCardPopup = page.querySelector('#popupNewCard');
-let addCardButton = profile.querySelector('.profile__button-add');
-let popupNewCardContainer = newCardPopup.querySelector('.popup__container');
-let closeNewCardPopupButton = popupNewCardContainer.querySelector('.popup__close');
+const newCardPopup = page.querySelector('#popupNewCard');
+const addCardButton = profile.querySelector('.profile__button-add');
+const popupNewCardContainer = newCardPopup.querySelector('.popup__container');
+const closeNewCardPopupButton = popupNewCardContainer.querySelector('.popup__close');
 
-let newCardformElement = popupNewCardContainer.querySelector('.form');
-let newCardformFildset = newCardformElement.querySelector('.form__fildset');
-let placeInput = newCardformFildset.querySelector('#formFildPlace');
-let linkInput = newCardformFildset.querySelector('#formFildLink');
+const newCardformElement = popupNewCardContainer.querySelector('.form');
+const newCardformFildset = newCardformElement.querySelector('.form__fildset');
+const placeInput = newCardformFildset.querySelector('#formFildPlace');
+const linkInput = newCardformFildset.querySelector('#formFildLink');
 
 //For Username form
 
@@ -122,7 +158,7 @@ function submitNewCardForm (evt) {
   evt.preventDefault();
 
   // клонируем содержимое тега template
-  let cardElement = cardTemplate.querySelector('.element').cloneNode(true);
+  const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
   // наполняем содержимым
   cardElement.querySelector('.element__image').src = linkInput.value;
@@ -135,4 +171,7 @@ function submitNewCardForm (evt) {
   togglePopup(newCardPopup);
 };
 
+// Submit form new card
 newCardformElement.addEventListener('submit', submitNewCardForm);
+
+
