@@ -2,35 +2,4 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  top:0;
-  left:0;
-  bottom: 0;
-  right: 0;
-  max-width: 75vh;
-  max-height: 75vh;
-}
-
-@media screen and (max-width: 900px) {
-  .popup__photoframe {
-    max-width: 75%;
-   max-height: 75%;
-
-  }
-}
-  /**
-  margin-top: 90px;
-  flex-direction: column;
-  width: 430px;
-  box-shadow: 0 0 25px 0 rgba(0, 0, 0, .15);
-  border-radius: 10px;
-  padding-bottom: 37px;
-  z-index: 3;
-}
-
-@media screen and (max-width: 900px) {
-  .popup__container {
-    width: 282px;
-    padding-bottom: 25px;
-
-  }
 }

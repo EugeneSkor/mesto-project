@@ -14,6 +14,7 @@
 @import url(../blocks/form/__button/form__button.css);
 @import url(../blocks/popup/_dark/popup_dark.css);
 @import url(../blocks/popup/__photoframe/popup__photoframe.css);
+@import url(../blocks/popup/__photo/popup_photo.css);
 @import url(../blocks/popup/__description/popup__description.css);
 
 @import url(../blocks/header/header.css);

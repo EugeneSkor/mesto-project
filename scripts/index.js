@@ -47,6 +47,32 @@ const formFildset = formElement.querySelector('.form__fildset');
 const nameInput = formFildset.querySelector('#formFildName');
 const jobInput = formFildset.querySelector('#formFildAbout');
 
+//For Username form
+
+function openPopup() {
+  profilePopup.classList.add('popup_opened');
+  nameInput.value = profileName.textContent
+  jobInput.value = profileDescription.textContent
+}
+
+function closePopup() {
+  profilePopup.classList.remove('popup_opened');
+}
+
+function submitForm (evt) {
+    evt.preventDefault();
+    profileName.textContent = nameInput.value;
+    profileDescription.textContent = jobInput.value;
+
+    closePopup();
+}
+
+editButton.addEventListener('click', openPopup);
+
+closePopupButton.addEventListener('click', closePopup);
+
+formElement.addEventListener('submit', submitForm);
+
 // Render cards
 
 const cardTemplate = page.querySelector('#element').content;
@@ -83,14 +109,15 @@ deleteButton.addEventListener('click', function () {
 // For photo popup
 
 const popupCardPhoto = page.querySelector('#popupCardPhoto');
+const elementImage = cardElement.querySelector('.element__image');
 const popupPhotoframe = popupCardPhoto.querySelector('.popup__photoframe');
 const closePhotoframe = popupPhotoframe.querySelector('.popup__close');
 const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
 const popupDescription = popupPhotoframe.querySelector('.popup__description');
 
 // open photo popup
-cardElement.addEventListener('click', function () {
-  popupPhoto.src = cardElement.querySelector('.element__image').src
+elementImage.addEventListener('click', function () {
+  popupPhoto.src = elementImage.src
   popupDescription.textContent = cardElement.querySelector('.element__title').textContent;
   popupCardPhoto.classList.add('popup_opened');
 });
@@ -115,32 +142,6 @@ const newCardformElement = popupNewCardContainer.querySelector('.form');
 const newCardformFildset = newCardformElement.querySelector('.form__fildset');
 const placeInput = newCardformFildset.querySelector('#formFildPlace');
 const linkInput = newCardformFildset.querySelector('#formFildLink');
-
-//For Username form
-
-function openPopup() {
-  profilePopup.classList.add('popup_opened');
-  nameInput.value = profileName.textContent
-  jobInput.value = profileDescription.textContent
-}
-
-function closePopup() {
-  profilePopup.classList.remove('popup_opened');
-}
-
-function submitForm (evt) {
-    evt.preventDefault();
-    profileName.textContent = nameInput.value;
-    profileDescription.textContent = jobInput.value;
-
-    closePopup();
-}
-
-editButton.addEventListener('click', openPopup);
-
-closePopupButton.addEventListener('click', closePopup);
-
-formElement.addEventListener('submit', submitForm);
 
 // For new card popup
 
@@ -169,6 +170,8 @@ function submitNewCardForm (evt) {
   cardElements.prepend(cardElement);
 
   togglePopup(newCardPopup);
+  linkInput.value = '';
+  placeInput.value = '';
 };
 
 // Submit form new card
