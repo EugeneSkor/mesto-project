@@ -1,10 +1,13 @@
 .elements {
   margin: 51px auto 0 auto;
+  min-height: calc(100vh - 479px);
+
 }
 
 @media screen and (max-width: 900px) {
   .elements {
     margin: 36px auto 0 auto;
+    min-height: calc(100vh - 479px);
   }
 }
 
