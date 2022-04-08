@@ -86,9 +86,9 @@ function closePopup(popup) {
 };
 
 function openUserPopup() {
-  openPopup(profilePopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileDescription.textContent;
+  openPopup(profilePopup);
 }
 
 function submitUserForm (evt) {
@@ -123,9 +123,8 @@ function createCard(card) {
   });
 
   // Добавляем слушатель openPhotoPopup
-  const elementImage = cardElement.querySelector('.element__image');
-  elementImage.addEventListener('click', function () {
-    popupPhoto.src = elementImage.src
+  cardImage.addEventListener('click', function () {
+    popupPhoto.src = cardImage.src
     popupDescription.textContent = cardElement.querySelector('.element__title').textContent;
     openPopup(popupCardPhoto);
   });
@@ -136,7 +135,7 @@ function createCard(card) {
 function submitNewCardForm (evt) {
   evt.preventDefault();
 
-  let newCustomCard = [
+  const newCustomCard = [
     {
      name: `${placeInput.value}`,
      link: `${linkInput.value}`
@@ -145,9 +144,6 @@ function submitNewCardForm (evt) {
 
   createCard(newCustomCard[0]);
   closePopup(newCardPopup);
-  linkInput.value = '';
-  placeInput.value = '';
-  newCustomCard = ''
 };
 
 //For Username form
