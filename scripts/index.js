@@ -33,6 +33,7 @@ const reverseInitialCards = initialCards.reverse();
 
 const page = document.querySelector('.page');
 const content = page.querySelector('.content');
+const popUp = page.getElementsByClassName('popup');
 const profile = content.querySelector('.profile');
 const profileContainer = content.querySelector('.profile__container');
 const profileInfo = profileContainer.querySelector('.profile__info');
@@ -42,7 +43,6 @@ const editButton = profileContainer.querySelector('.profile__button-edit');
 
 const profilePopup = page.querySelector('#popupUserInfo');
 const userPopupContainer = profilePopup.querySelector('.popup__container');
-const closeUserPopupButton = userPopupContainer.querySelector('.popup__close');
 
 const formElement = profilePopup.querySelector('.form');
 const formFildset = formElement.querySelector('.form__fildset');
@@ -60,7 +60,6 @@ const cardElements = elements.querySelector('.elements__grid');
 const newCardPopup = page.querySelector('#popupNewCard');
 const addCardButton = profile.querySelector('.profile__button-add');
 const popupNewCardContainer = newCardPopup.querySelector('.popup__container');
-const closeNewCardPopupButton = popupNewCardContainer.querySelector('.popup__close');
 
 const newCardformElement = popupNewCardContainer.querySelector('.form');
 const newCardformFildset = newCardformElement.querySelector('.form__fildset');
@@ -71,18 +70,36 @@ const linkInput = newCardformFildset.querySelector('#formFildLink');
 
 const popupCardPhoto = page.querySelector('#popupCardPhoto');
 const popupPhotoframe = popupCardPhoto.querySelector('.popup__photoframe');
-const closePhotoframe = popupPhotoframe.querySelector('.popup__close');
 const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
 const popupDescription = popupPhotoframe.querySelector('.popup__description');
 
 // Popup functions
 
 function openPopup (popup) {
+  document.addEventListener('keydown', closeByEsc);
+  document.addEventListener('click', closeByOverlayClick);
   popup.classList.add('popup_opened');
 };
 
 function closePopup(popup) {
+  document.removeEventListener('keydown', closeByEsc);
+  document.removeEventListener('click', closeByOverlayClick);
   popup.classList.remove('popup_opened');
+};
+
+function closeByEsc (evt) {
+  evt.preventDefault();
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.which === 27) {
+    closePopup(activePopup);
+  };
+};
+
+function closeByOverlayClick (evt) {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+    closePopup(activePopup);
+  };
 };
 
 function openUserPopup() {
@@ -150,22 +167,18 @@ function submitNewCardForm (evt) {
 
 editButton.addEventListener('click', openUserPopup);
 
-closeUserPopupButton.addEventListener('click', function () {closePopup(profilePopup)});
-
 formElement.addEventListener('submit', submitUserForm);
 
 // For new card popup
 
 addCardButton.addEventListener('click', function () {openPopup(newCardPopup)});
 
-closeNewCardPopupButton.addEventListener('click', function () {closePopup(newCardPopup)});
-
 newCardformElement.addEventListener('submit', submitNewCardForm);
-
-// For photo popup
-
-closePhotoframe.addEventListener('click', function () {closePopup(popupCardPhoto)});
 
 // Render cards
 
 reverseInitialCards.forEach(createCard);
+
+
+
+

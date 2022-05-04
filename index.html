@@ -38,12 +38,14 @@
     <div class="popup__container">
       <h2 class="popup__header">Редактировать профиль</h2>
       <button class="button popup__close" type="button"></button>
-      <form class="form" name="userdata">
+      <form class="form" name="userdata" novalidate>
         <fieldset class="form__fildset">
-          <input type="text" class="form__fild" id="formFildName" name ="name" value="" placeholder="Имя">
-          <input type="text" class="form__fild" id="formFildAbout"  name ="about" value="" placeholder="О себе">
+          <input type="text" class="form__fild" id="formFildName" name ="name" value="" placeholder="Имя" minlength="2" maxlength="40" required>
+          <span class="email-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <input type="text" class="form__fild" id="formFildAbout"  name ="about" value="" placeholder="О себе" minlength="2" maxlength="200" required>
+          <span class="email-input-error form__input-error">Необходимо заполнить данное поле</span>
         </fieldset>
-        <button type="submit" class="button form__button">Сохранить</button>
+        <button type="submit" class="button form__button form__button_disabled">Сохранить</button>
       </form>
     </div>
   </div>
@@ -51,10 +53,10 @@
     <div class="popup__container">
       <h2 class="popup__header">Новое место</h2>
       <button class="button popup__close" type="button"></button>
-      <form class="form" name="newPlace">
+      <form class="form" name="newPlace" novalidate>
         <fieldset class="form__fildset">
-          <input type="text" class="form__fild" id="formFildPlace" name ="place" value="" placeholder="Название">
-          <input type="text" class="form__fild" id="formFildLink"  name ="link" value="" placeholder="Ссылка на картинку">
+          <input type="text" class="form__fild" id="formFildPlace" name ="place" value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <input type="url" class="form__fild" id="formFildLink"  name ="link" value="" placeholder="Ссылка на картинку" required>
         </fieldset>
         <button type="submit" class="button form__button">Создать</button>
       </form>
