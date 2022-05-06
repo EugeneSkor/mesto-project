@@ -1,32 +1,3 @@
-// Cards
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const reverseInitialCards = initialCards.reverse();
 
 // User info popup
@@ -44,16 +15,16 @@ const editButton = profileContainer.querySelector('.profile__button-edit');
 const profilePopup = page.querySelector('#popupUserInfo');
 const userPopupContainer = profilePopup.querySelector('.popup__container');
 
-const formElement = profilePopup.querySelector('.form');
-const formFildset = formElement.querySelector('.form__fildset');
+const formProfileEdit = profilePopup.querySelector('.form');
+const formFildset = formProfileEdit.querySelector('.form__fildset');
 const nameInput = formFildset.querySelector('#formFildName');
 const jobInput = formFildset.querySelector('#formFildAbout');
 
 // For render cards
 
 const cardTemplate = page.querySelector('#element').content;
-const elements = content.querySelector('.elements');
-const cardElements = elements.querySelector('.elements__grid');
+const cardsSection = content.querySelector('.elements');
+const cardsContainer = cardsSection.querySelector('.elements__grid');
 
 // For new card popup
 
@@ -65,6 +36,7 @@ const newCardformElement = popupNewCardContainer.querySelector('.form');
 const newCardformFildset = newCardformElement.querySelector('.form__fildset');
 const placeInput = newCardformFildset.querySelector('#formFildPlace');
 const linkInput = newCardformFildset.querySelector('#formFildLink');
+const submitaddCardButton = newCardformElement.querySelector('.form__button');
 
 // For photo popup
 
@@ -88,15 +60,15 @@ function closePopup(popup) {
 };
 
 function closeByEsc (evt) {
-  const activePopup = document.querySelector('.popup_opened');
   if (evt.which === 27) {
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
 };
 
 function closeByOverlayClick (evt) {
-  const activePopup = document.querySelector('.popup_opened');
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close')) {
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
 };
@@ -121,11 +93,11 @@ function createCard(card) {
   // наполняем содержимым
   const cardImage = cardElement.querySelector('.element__image');
   cardImage.src = card.link;
-  cardImage.alt = "Фоторгафия " + card.name;
+  cardImage.alt = "Фотография " + card.name;
   cardElement.querySelector('.element__title').textContent = card.name;
 
   // отображаем на странице
-  cardElements.prepend(cardElement);
+  cardsContainer.prepend(cardElement);
 
   // Добавляем слушатель Like
   cardElement.querySelector('.element__icon').addEventListener('click', function (evt) {
@@ -141,10 +113,17 @@ function createCard(card) {
   // Добавляем слушатель openPhotoPopup
   cardImage.addEventListener('click', function () {
     popupPhoto.src = cardImage.src
-    popupDescription.textContent = cardElement.querySelector('.element__title').textContent;
+    popupPhoto.alt = "Фоторгафия " + card.name;
+    popupDescription.textContent = card.name;
     openPopup(popupCardPhoto);
   });
 
+};
+
+// Disabled button
+function disabledButton (button) {
+  button.classList.add('form__button_disabled');
+  button.setAttribute("disabled", "disabled");
 };
 
 // Add new card
@@ -160,13 +139,15 @@ function submitNewCardForm (evt) {
 
   createCard(newCustomCard[0]);
   closePopup(newCardPopup);
+  newCardformElement.reset()
+  disabledButton(submitaddCardButton)
 };
 
 //For Username form
 
 editButton.addEventListener('click', openUserPopup);
 
-formElement.addEventListener('submit', submitUserForm);
+formProfileEdit.addEventListener('submit', submitUserForm);
 
 // For new card popup
 
