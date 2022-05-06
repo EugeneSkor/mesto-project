@@ -88,7 +88,6 @@ function closePopup(popup) {
 };
 
 function closeByEsc (evt) {
-  evt.preventDefault();
   const activePopup = document.querySelector('.popup_opened');
   if (evt.which === 27) {
     closePopup(activePopup);
@@ -178,7 +177,3 @@ newCardformElement.addEventListener('submit', submitNewCardForm);
 // Render cards
 
 reverseInitialCards.forEach(createCard);
-
-
-
-

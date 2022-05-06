@@ -1,0 +1,26 @@
+.form__input-error {
+  visibility: hidden;
+  position: absolute;
+  left: 36px;
+  top: 88px;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #F00;
+}
+
+.form__input-error:nth-of-type(2n) {
+  top: 147px;
+}
+
+
+@media screen and (max-width: 900px) {
+  .form__input-error {
+    left: 22px;
+    top: 109px;
+  }
+
+  .form__input-error:nth-of-type(2n) {
+    top: 168px;
+  }
+}

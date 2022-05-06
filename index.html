@@ -41,11 +41,11 @@
       <form class="form" name="userdata" novalidate>
         <fieldset class="form__fildset">
           <input type="text" class="form__fild" id="formFildName" name ="name" value="" placeholder="Имя" minlength="2" maxlength="40" required>
-          <span class="email-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <span class="formFildName-error form__input-error"></span>
           <input type="text" class="form__fild" id="formFildAbout"  name ="about" value="" placeholder="О себе" minlength="2" maxlength="200" required>
-          <span class="email-input-error form__input-error">Необходимо заполнить данное поле</span>
+          <span class="formFildAbout-error form__input-error"></span>
         </fieldset>
-        <button type="submit" class="button form__button form__button_disabled">Сохранить</button>
+        <button type="submit" class="button form__button">Сохранить</button>
       </form>
     </div>
   </div>
@@ -56,7 +56,9 @@
       <form class="form" name="newPlace" novalidate>
         <fieldset class="form__fildset">
           <input type="text" class="form__fild" id="formFildPlace" name ="place" value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="formFildPlace-error form__input-error"></span>
           <input type="url" class="form__fild" id="formFildLink"  name ="link" value="" placeholder="Ссылка на картинку" required>
+          <span class="formFildLink-error form__input-error"></span>
         </fieldset>
         <button type="submit" class="button form__button">Создать</button>
       </form>
@@ -78,5 +80,6 @@
     </li>
   </template>
   <script src="./scripts/index.js"></script>
+  <script src="./scripts/validate.js"></script>
 </body>
 </html>

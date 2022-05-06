@@ -12,6 +12,8 @@
 @import url(../blocks/form/__fildset/form__fildset.css);
 @import url(../blocks/form/__fild/form__fild.css);
 @import url(../blocks/form/__fild/_invalid/form__fild_invalid.css);
+@import url(../blocks/form/__input-error/form__input-error.css);
+@import url(../blocks/form/__input-error/_active/form__input-error_active.css);
 @import url(../blocks/form/__button/form__button.css);
 @import url(../blocks/form/__button/_disabled/form__button_disabled.css);
 @import url(../blocks/popup/_dark/popup_dark.css);
