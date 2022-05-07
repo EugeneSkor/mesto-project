@@ -86,7 +86,7 @@ function submitUserForm (evt) {
   closePopup(profilePopup);
 }
 
-function createCard(card) {
+const createCard = (card) => {
   // клонируем содержимое тега template
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
@@ -96,9 +96,6 @@ function createCard(card) {
   cardImage.alt = "Фотография " + card.name;
   cardElement.querySelector('.element__title').textContent = card.name;
 
-  // отображаем на странице
-  cardsContainer.prepend(cardElement);
-
   // Добавляем слушатель Like
   cardElement.querySelector('.element__icon').addEventListener('click', function (evt) {
     evt.target.classList.toggle('element__icon_active');
@@ -107,7 +104,7 @@ function createCard(card) {
   // Добавляем слушатель Del
   const deleteButton = cardElement.querySelector('.element__basket');
   deleteButton.addEventListener('click', function () {
-    deleteButton.closest('.element').remove();
+  deleteButton.closest('.element').remove();
   });
 
   // Добавляем слушатель openPhotoPopup
@@ -118,7 +115,15 @@ function createCard(card) {
     openPopup(popupCardPhoto);
   });
 
+  return(cardElement)
+
 };
+
+const renderCard = (initialCards) => {
+  initialCards.forEach((item) => {
+    cardsContainer.prepend(createCard(item));
+  })
+}
 
 // Disabled button
 function disabledButton (button) {
@@ -137,7 +142,7 @@ function submitNewCardForm (evt) {
     }
   ];
 
-  createCard(newCustomCard[0]);
+  cardsContainer.prepend(createCard(newCustomCard[0]));
   closePopup(newCardPopup);
   newCardformElement.reset()
   disabledButton(submitaddCardButton)
@@ -156,5 +161,4 @@ addCardButton.addEventListener('click', function () {openPopup(newCardPopup)});
 newCardformElement.addEventListener('submit', submitNewCardForm);
 
 // Render cards
-
-reverseInitialCards.forEach(createCard);
+renderCard(initialCards)
