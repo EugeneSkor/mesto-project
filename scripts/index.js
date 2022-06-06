@@ -1,5 +1,5 @@
-import Card from "./card.js";
-import { initialCards } from "./cards.js"
+// import Card from "./card.js";
+//import { initialCards } from "./cards.js"
 
 const reverseInitialCards = initialCards.reverse();
 
@@ -43,14 +43,14 @@ const submitaddCardButton = newCardformElement.querySelector('.form__button');
 
 // For photo popup
 
-export const popupCardPhoto = page.querySelector('#popupCardPhoto');
+/*export */const popupCardPhoto = page.querySelector('#popupCardPhoto');
 const popupPhotoframe = popupCardPhoto.querySelector('.popup__photoframe');
-export const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
-export const popupDescription = popupPhotoframe.querySelector('.popup__description');
+/*export*/ const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
+/*export*/ const popupDescription = popupPhotoframe.querySelector('.popup__description');
 
 // Popup functions
 
-export function openPopup (popup) {
+/*export*/ function openPopup (popup) {
   document.addEventListener('keydown', closeByEsc);
   document.addEventListener('click', closeByOverlayClick);
   popup.classList.add('popup_opened');
@@ -89,7 +89,65 @@ function submitUserForm (evt) {
   closePopup(profilePopup);
 }
 
-/* const createCard = (card) => {
+/*
+
+class Card {
+  constructor(data, templateSelector) {
+    this._templateSelector = templateSelector;
+    this._link = data.link
+    this._name = data.name
+    }
+
+    _getTemplate() {
+      this._cardElement = document
+        .querySelector(this._templateSelector)
+        .content
+        .querySelector('.element')
+        .cloneNode(true);
+
+      return this._cardElement;
+    }
+
+    generateCard() {
+      this._element = this._getTemplate();
+      this._setEventListeners();
+
+      this._cardImage = this._element.querySelector('.element__image');
+      this._cardImage.src = this._link;
+      this._cardImage.alt = "Фотография " + this._name;
+      this._cardElement.querySelector('.element__title').textContent = this._name;
+
+      return this._element;
+    }
+
+    _setEventListeners() {
+
+      // Добавляем слушатель Like
+      this._cardElement.querySelector('.element__icon').addEventListener('click', (evt) => {
+        evt.target.classList.toggle('element__icon_active');
+      });
+
+      // Добавляем слушатель Del
+      this._deleteButton = this._cardElement.querySelector('.element__basket');
+      this._deleteButton.addEventListener('click', () => {
+      this._deleteButton.closest('.element').remove();
+      });
+
+      // Добавляем слушатель openPhotoPopup
+      this._cardImage.addEventListener('click', () => {
+        popupPhoto.src = cardImage.src
+        popupPhoto.alt = "Фоторгафия " + this._name;
+        popupDescription.textContent = this._name;
+        openPopup(popupCardPhoto);
+      });
+
+    }
+  } */
+
+
+
+
+const createCard = (card) => {
   // клонируем содержимое тега template
   const cardElement = cardTemplate.querySelector('.element').cloneNode(true);
 
@@ -120,11 +178,24 @@ function submitUserForm (evt) {
 
   return(cardElement)
 
-}; */
+};
+
+/*
+const renderCard = (isGrid) => {
+  cardsContainer.innerHTML = '';
+  initialCards.forEach((item) => {
+    const card = isGrid
+    new Card(item, '.element')
+    const cardElement = card.generateCard();
+    console.log(cardElement)
+    cardsContainer.append(cardElement);
+  });
+};
+*/
 
 const renderCard = (initialCards) => {
   initialCards.forEach((item) => {
-    cardsContainer.prepend(Card.generateCard(item));
+    cardsContainer.prepend(createCard(item));
   })
 }
 
