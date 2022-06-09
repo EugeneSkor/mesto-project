@@ -1,10 +1,12 @@
-import { popupPhoto, popupDescription, openPopup, popupCardPhoto  } from './index.js';
+import openPopup from './index.js';
 
 export default class Card {
   constructor(data, templateSelector) {
     this._templateSelector = templateSelector;
-    this._link = data.link
-    this._name = data.name
+    this._cardImage = data.link;
+    this._name = data.name;
+    this._cardImageAlt = "Фотография " + this._name
+
     }
 
     _getTemplate() {
@@ -21,10 +23,9 @@ export default class Card {
       this._element = this._getTemplate();
       this._setEventListeners();
 
-      this._cardImage = this._element.querySelector('.element__image');
-      this._cardImage.src = this._link;
-      this._cardImage.alt = "Фотография " + this._name;
-      this._cardElement.querySelector('.element__title').textContent = this._name;
+      this._element.querySelector('.element__image').src = this._cardImage;
+      this._element.querySelector('.element__image').alt = this._cardImageAlt;
+      this._element.querySelector('.element__title').textContent = this._name;
 
       return this._element;
     }
@@ -32,24 +33,24 @@ export default class Card {
     _setEventListeners() {
 
       // Добавляем слушатель Like
-      this._cardElement.querySelector('.element__icon').addEventListener('click', (evt) => {
+      this._element.querySelector('.element__icon').addEventListener('click', (evt) => {
         evt.target.classList.toggle('element__icon_active');
       });
 
       // Добавляем слушатель Del
-      this._deleteButton = this._cardElement.querySelector('.element__basket');
+      this._deleteButton = this._element.querySelector('.element__basket');
       this._deleteButton.addEventListener('click', () => {
       this._deleteButton.closest('.element').remove();
       });
 
       // Добавляем слушатель openPhotoPopup
-      this._cardImage.addEventListener('click', () => {
-        popupPhoto.src = cardImage.src
-        popupPhoto.alt = "Фоторгафия " + this._name;
+      this._element.querySelector('.element__image').addEventListener('click', () => {
+        popupPhoto.src = this._cardImage
+        popupPhoto.alt = this._cardImageAlt;
         popupDescription.textContent = this._name;
         openPopup(popupCardPhoto);
       });
 
     }
-  }
+}
 
