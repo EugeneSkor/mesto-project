@@ -1,5 +1,5 @@
 import Card from "./card.js";
-import { formSettings, FormValidator } from "./validate.js"
+import { formSettings, FormValidator } from "./FormValidator.js"
 import initialCards from "./cards.js"
 
 const reverseInitialCards = initialCards.reverse();
@@ -44,33 +44,33 @@ const submitaddCardButton = newCardformElement.querySelector('.form__button');
 
 // For photo popup
 
-/*export */const popupCardPhoto = page.querySelector('#popupCardPhoto');
+const popupCardPhoto = page.querySelector('#popupCardPhoto');
 const popupPhotoframe = popupCardPhoto.querySelector('.popup__photoframe');
-/*export*/ const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
-/*export*/ const popupDescription = popupPhotoframe.querySelector('.popup__description');
+export const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
+export const popupDescription = popupPhotoframe.querySelector('.popup__description');
 
 // For validation
-const userDataForm = document.forms.userdata;
-const newPlaceForm = document.forms.newPlace;
+const userDataFormValidator = new FormValidator(formSettings, document.forms.userdata);
+const newPlaceFormValidator = new FormValidator(formSettings, document.forms.newPlace);
 let validator = '';
 
 // Popup functions
 
-export default function openPopup (popup) {
+export function openPopup (popup) {
   document.addEventListener('keydown', closeByEsc);
   document.addEventListener('click', closeByOverlayClick);
-  popup.classList.add('popup_opened');
 
-  const formTarget = () => {
+  const defineFormType = () => {
     if (popup.id === 'popupNewCard')
-      validator = new FormValidator(formSettings, document.forms.newPlace);
+      newPlaceFormValidator.enableValidation();
+      newPlaceFormValidator.disabledButton();
     if (popup.id === 'popupUserInfo')
-      validator = new FormValidator(formSettings, document.forms.userdata);
+      userDataFormValidator.enableValidation();
     }
 
-    formTarget()
+    defineFormType()
 
-    validator.enableValidation()
+  popup.classList.add('popup_opened');
 };
 
 function closePopup(popup) {
@@ -120,12 +120,6 @@ const renderCards = () => {
 
 renderCards();
 
-// Disabled button
-function disabledButton (button) {
-  button.classList.add('form__button_disabled');
-  button.setAttribute("disabled", "disabled");
-};
-
 // Add new card
 function submitNewCardForm (evt) {
   evt.preventDefault();
@@ -142,7 +136,6 @@ function submitNewCardForm (evt) {
   cardsContainer.prepend(cardElement);
   closePopup(newCardPopup);
   newCardformElement.reset()
-  disabledButton(submitaddCardButton)
 };
 
 
