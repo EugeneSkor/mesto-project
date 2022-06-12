@@ -20,11 +20,17 @@ export class FormValidator {
     this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector);
     }
 
-    // При открытии попап до ввода данных скрывать кнопку
-    disabledButton() {
-      this._buttonStateDisabled();
-      }
+    resetValidation() {
+      // Сбрасывает ошибку при повторном открытии попапа до отправки формы
+      this._inputList.forEach((inputElement) => {
+        // убирает ошибку отсутствия элементов с классом this._errorClass
+        this._isValid(inputElement);
+        this._hideInputError(inputElement)
+      });
+      // Скрывает кнопку при первом открытии
+      this.disableButton();
 
+    }
 
     enableValidation() {
       this._setEventListeners()
@@ -47,16 +53,16 @@ export class FormValidator {
     _toggleButtonState() {
       // Если есть хотя бы один невалидный инпут
       this._hasInvalidInput()
-      ? this._buttonStateDisabled()
-      : this._buttonStateActive();
+      ? this.disableButton()
+      : this._activeButton();
     }
 
-    _buttonStateDisabled() {
+    disableButton()  {
       this._buttonElement.classList.add(this._inactiveButtonClass);
       this._buttonElement.setAttribute("disabled", "disabled");
     }
 
-    _buttonStateActive() {
+    _activeButton() {
       this._buttonElement.classList.remove(this._inactiveButtonClass);
       this._buttonElement.removeAttribute("disabled");
     }

@@ -1,4 +1,4 @@
-import Card from "./card.js";
+import Card from "./Сard.js";
 import { formSettings, FormValidator } from "./FormValidator.js"
 import initialCards from "./cards.js"
 
@@ -34,53 +34,41 @@ const cardsContainer = cardsSection.querySelector('.elements__grid');
 
 const newCardPopup = page.querySelector('#popupNewCard');
 const addCardButton = profile.querySelector('.profile__button-add');
-const popupNewCardContainer = newCardPopup.querySelector('.popup__container');
 
-const newCardformElement = popupNewCardContainer.querySelector('.form');
-const newCardformFildset = newCardformElement.querySelector('.form__fildset');
+const newCardform = document.forms.newPlace;
+const newCardformFildset = newCardform.querySelector('.form__fildset');
 const placeInput = newCardformFildset.querySelector('#formFildPlace');
 const linkInput = newCardformFildset.querySelector('#formFildLink');
-const submitaddCardButton = newCardformElement.querySelector('.form__button');
 
 // For photo popup
 
 const popupCardPhoto = page.querySelector('#popupCardPhoto');
 const popupPhotoframe = popupCardPhoto.querySelector('.popup__photoframe');
-export const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
-export const popupDescription = popupPhotoframe.querySelector('.popup__description');
+const popupPhoto = popupPhotoframe.querySelector('.popup__photo');
+const popupDescription = popupPhotoframe.querySelector('.popup__description');
 
 // For validation
 const userDataFormValidator = new FormValidator(formSettings, document.forms.userdata);
-const newPlaceFormValidator = new FormValidator(formSettings, document.forms.newPlace);
-let validator = '';
+userDataFormValidator.enableValidation();
+const newPlaceFormValidator = new FormValidator(formSettings, newCardform);
+newPlaceFormValidator.enableValidation();
 
 // Popup functions
 
-export function openPopup (popup) {
+function openPopup (popup) {
   document.addEventListener('keydown', closeByEsc);
-  document.addEventListener('click', closeByOverlayClick);
-
-  const defineFormType = () => {
-    if (popup.id === 'popupNewCard')
-      newPlaceFormValidator.enableValidation();
-      newPlaceFormValidator.disabledButton();
-    if (popup.id === 'popupUserInfo')
-      userDataFormValidator.enableValidation();
-    }
-
-    defineFormType()
-
+  document.addEventListener('mousedown', closeByOverlayClick);
   popup.classList.add('popup_opened');
 };
 
 function closePopup(popup) {
   document.removeEventListener('keydown', closeByEsc);
-  document.removeEventListener('click', closeByOverlayClick);
+  document.removeEventListener('mousedown', closeByOverlayClick);
   popup.classList.remove('popup_opened');
 };
 
 function closeByEsc (evt) {
-  if (evt.which === 27) {
+  if (evt.key === 'Escape') {
     const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
@@ -107,12 +95,36 @@ function submitUserForm (evt) {
   closePopup(profilePopup);
 }
 
+function openNewCardPopup() {
+  newCardform.reset();
+  newPlaceFormValidator.resetValidation();
+  openPopup(newCardPopup);
+}
+
+// Функция создаёт и открывает попап с увеличенной картинкой,
+//данные на вход передаются при добавлении обработчика клика на фотографию
+//при создании экземпляра карточки, по этому ему нужно передать эту функцию в коструктор Card
+export function handleCardClick(name, link, alt) {
+  // Передаём ссылку на картинку из класса Card
+  popupPhoto.src = link;
+  popupPhoto.alt = alt;
+  popupDescription.textContent = name;
+  openPopup(popupCardPhoto);
+}
+
+function createCard(item) {
+  // тут создаете карточку и возвращаете ее
+  const card = new Card(item, '#element', handleCardClick);
+  // Создаём карточку
+  const cardElement = card.generateCard();
+// Возвращаем готовую карточку
+return cardElement
+}
+
 const renderCards = () => {
   reverseInitialCards.forEach((item) => {
-    // Создадим экземпляр карточки
-  const card = new Card(item, '#element');
-  // Создаём карточку и возвращаем наружу
-  const cardElement = card.generateCard();
+  // Создаём карточку
+  const cardElement = createCard(item);
   // Добавляем в DOM
   cardsContainer.prepend(cardElement);
   })
@@ -131,11 +143,13 @@ function submitNewCardForm (evt) {
     }
   ;
 
-  const card = new Card(newCustomCard, '#element');
-  const cardElement = card.generateCard();
-  cardsContainer.prepend(cardElement);
+  // Вставляем новую карточку
+  cardsContainer.prepend(createCard(newCustomCard));
   closePopup(newCardPopup);
-  newCardformElement.reset()
+  // Сбрасываем поля формы
+  newCardform.reset()
+  // Деактивируем кнопку при следующем открытии попапа
+  newPlaceFormValidator.disableButton();
 };
 
 
@@ -147,6 +161,6 @@ formProfileEdit.addEventListener('submit', submitUserForm);
 
 // For new card popup
 
-addCardButton.addEventListener('click', function () {openPopup(newCardPopup)});
+addCardButton.addEventListener('click', function () {openNewCardPopup()});
 
-newCardformElement.addEventListener('submit', submitNewCardForm);
+newCardform.addEventListener('submit', submitNewCardForm);
