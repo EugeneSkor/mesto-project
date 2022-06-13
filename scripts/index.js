@@ -146,10 +146,6 @@ function submitNewCardForm (evt) {
   // Вставляем новую карточку
   cardsContainer.prepend(createCard(newCustomCard));
   closePopup(newCardPopup);
-  // Сбрасываем поля формы
-  newCardform.reset()
-  // Деактивируем кнопку при следующем открытии попапа
-  newPlaceFormValidator.disableButton();
 };
 
 

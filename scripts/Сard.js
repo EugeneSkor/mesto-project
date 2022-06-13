@@ -5,7 +5,6 @@ export default class Card {
     this._name = data.name;
     this._cardImageAlt = "Фотография " + this._name
     this._handleCardClick = handleCardClick;
-
     }
 
     _getTemplate() {
