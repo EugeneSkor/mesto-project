@@ -55,6 +55,12 @@ export default class Card {
       // Добавляем слушатель openPhotoPopup, передаём ему данные для отображения в открытом попапе
       this._cardImage.addEventListener('click', () => {
         // Передаём параметры функции создания попапа с увеличенной фотографией
+        /* const photoInfo = {
+          name: this._name,
+          link: this._cardImageLink,
+          alt: this._cardImageAlt
+        }
+        this._handleCardClick(this._name, this._cardImageLink, this._cardImageAlt)*/
         this._handleCardClick(this._name, this._cardImageLink, this._cardImageAlt)
       });
     }
