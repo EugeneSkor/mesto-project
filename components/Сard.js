@@ -1,8 +1,8 @@
 export default class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor( { item, handleCardClick }, templateSelector) {
     this._templateSelector = templateSelector;
-    this._cardImageLink = data.link;
-    this._name = data.name;
+    this._cardImageLink = item.link;
+    this._name = item.name;
     this._cardImageAlt = "Фотография " + this._name
     this._handleCardClick = handleCardClick;
     }
@@ -55,12 +55,6 @@ export default class Card {
       // Добавляем слушатель openPhotoPopup, передаём ему данные для отображения в открытом попапе
       this._cardImage.addEventListener('click', () => {
         // Передаём параметры функции создания попапа с увеличенной фотографией
-        /* const photoInfo = {
-          name: this._name,
-          link: this._cardImageLink,
-          alt: this._cardImageAlt
-        }
-        this._handleCardClick(this._name, this._cardImageLink, this._cardImageAlt)*/
         this._handleCardClick(this._name, this._cardImageLink, this._cardImageAlt)
       });
     }
