@@ -1,4 +1,4 @@
-const path = require('path'); // подключаем path к конфигу вебпак
+const path = require('path'); // подключаем path к конфигу вебпак для того, чтобы не прописывать абсолютный путь
 const HtmlWebpackPlugin = require('html-webpack-plugin'); // подключили плагин для работы с HTML
 const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // подключили плагин для очистки папки dist перед новой сборкой
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подключили плагин для объединения CSS в один файл
@@ -8,7 +8,7 @@ module.exports = {
     main: './src/index.js' // указали в какой файл будет собираться весь js и дали ему имя
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'dist'), // __dirname - корневая директория где лежит файл webpack.config, от неё рассчитываются относительные пути
     filename: 'main.js',
     publicPath: ''
   },
