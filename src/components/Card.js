@@ -30,25 +30,24 @@ export default class Card {
       return this._element;
     }
 
-    _setEventListeners() {
-      this._toggleLike();
-      this._deleteCard();
+     _setEventListeners() {
+      // Добавляем слушатель Like
+      this._element.querySelector('.element__icon').addEventListener('click', evt => this._toggleLike(evt));
+      // Добавляем слушатель Del
+      this._deleteButton = this._element.querySelector('.element__basket');
+      this._deleteButton.addEventListener('click', () => this._deleteCard());
+
       this._handleImageClick();
     }
 
-    _toggleLike() {
-      // Добавляем слушатель Like
-      this._element.querySelector('.element__icon').addEventListener('click', (evt) => {
+    _toggleLike(evt) {
+      // Обработчик Like
         evt.target.classList.toggle('element__icon_active');
-      });
     }
 
     _deleteCard() {
-      // Добавляем слушатель Del
-      this._deleteButton = this._element.querySelector('.element__basket');
-      this._deleteButton.addEventListener('click', () => {
+      // Обработчик Del
       this._deleteButton.closest('.element').remove();
-      });
     }
 
     _handleImageClick() {

@@ -23,8 +23,6 @@ export class FormValidator {
     resetValidation() {
       // Сбрасывает ошибку при повторном открытии попапа до отправки формы
       this._inputList.forEach((inputElement) => {
-        // убирает ошибку отсутствия элементов с классом this._errorClass
-        this._isValid(inputElement);
         this._hideInputError(inputElement)
       });
       // Скрывает кнопку при первом открытии
@@ -88,21 +86,22 @@ export class FormValidator {
     // Метод удаления класса с ошибкой
     _hideInputError(inputElement) {
       inputElement.classList.remove(this._inputErrorClass);
+      const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
       // Скрываем сообщение об ошибке
-      this._errorElement.classList.remove(this._errorClass);
+      errorElement.classList.remove(this._errorClass);
       // Очистим ошибку
-      this._errorElement.textContent = '';
+      errorElement.textContent = '';
     }
 
     // Метод добавления класса с ошибкой
     _showInputError(inputElement) {
-      this._errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
+      const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
       // Добавляем класс с ошибкой
       inputElement.classList.add(this._inputErrorClass);
       // Заменим содержимое span с ошибкой на значение validationMessage из свойства элемента
-      this._errorElement.textContent = inputElement.validationMessage;
+      errorElement.textContent = inputElement.validationMessage;
       // Показываем сообщение об ошибке
-      this._errorElement.classList.add(this._errorClass);
+      errorElement.classList.add(this._errorClass);
     }
 
 };

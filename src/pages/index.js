@@ -1,5 +1,5 @@
-import '../pages/index.css';
-import Card from "../components/Сard.js";
+import './index.css';
+import Card from "../components/Card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
@@ -7,17 +7,11 @@ import UserInfo from "../components/UserInfo.js";
 import { formSettings, FormValidator } from "../components/FormValidator.js"
 import {
 reverseInitialCards,
-profileName,
-profileDescription,
 editButton,
-profilePopup,
 nameInput,
 jobInput,
-cardsContainer,
-newCardPopup,
 addCardButton,
 newCardform,
-popupCardPhoto
 } from "../utils/constants.js"
 
 // For validation
@@ -28,78 +22,96 @@ newPlaceFormValidator.enableValidation();
 
 // Объект с карточками для отображения
 
+// Инстанцирование класса карточки
+function createCard(item) {
+  // Создаём новую карточку
+  const card = new Card({ item: item, handleCardClick: handleCardClick }, '#element');
+  // Наполняем данными
+  const cardElement = card.generateCard();
+  // возвращаем готовую карточку
+  return cardElement
+};
+
 // Создаём массив для добавления карточек на страницу
 const cardList = new Section(
-  {
-    // Описываем что добавляем
+  { // Описываем что добавляем
     items: reverseInitialCards,
     // Описываем как добавляем
     renderer: (item) => {
-      // Создаём новую карточку
-      const card = new Card({ item: item, handleCardClick: handleCardClick }, '#element');
-      // Наполняем данными
-      const cardElement = card.generateCard();
       // Отображаем на странице
-      cardList.addItem(cardElement);
+      cardList.addItem(createCard(item));
     }
     // Описываем куда добавляем
-  }, cardsContainer
+  }, ".elements__grid"
 );
 
 // Popup functions
 
 // User name popup
 
-const userInfo = new UserInfo({ nameSelector: profileName, descriptionSelector: profileDescription })
+const userInfo = new UserInfo({ nameSelector: '.profile__name', descriptionSelector: '.profile__description' })
 
-const PopupWithUserForm = new PopupWithForm({
-  popupSelector: profilePopup,
+const popupWithUserForm = new PopupWithForm({
+  popupSelector: '#popupUserInfo',
     handleFormSubmit: (inputs) => {
       userInfo.setUserInfo(inputs)}
 });
 
+popupWithUserForm.setEventListeners();
+
 // Add new card
 
-const PopupWithCardForm = new PopupWithForm({
-  popupSelector: newCardPopup,
+/*const popupWithCardForm = new PopupWithForm({
+  popupSelector: '#popupNewCard',
     // Передаём в обработчик сгенерированный массив зачений полей
     handleFormSubmit: (inputs) => {
       const newCustomCard = new Section({
         // Для создания карчточки используем значения из полей
         items: [inputs],
         renderer: (item) => {
-          const singlecard = new Card({ item: item, handleCardClick: handleCardClick }, '#element');
-          const singlecardElement = singlecard.generateCard();
-          newCustomCard.addItem(singlecardElement);
+          newCustomCard.addItem(createCard(item));
         }
-      }, cardsContainer);
+      }, ".elements__grid");
     // Отображаем карточку на странице
     newCustomCard.renderItems();
   }
+});*/
+
+const popupWithCardForm = new PopupWithForm({
+  popupSelector: '#popupNewCard',
+    // Передаём в обработчик сгенерированный массив зачений полей
+    handleFormSubmit: (inputs) => {
+    // инстанцируем карточку и отображаем на странице
+    cardList.addItem(createCard(inputs));
+  }
 });
+
+popupWithCardForm.setEventListeners();
+
+const photoPopup = new PopupWithImage({ popupSelector: '#popupCardPhoto' });
 
 // Запускаем рендер карточек
 cardList.renderItems();
 
-// Функция создаёт и открывает попап с увеличенной картинкой,
+// Функция открывает попап с увеличенной картинкой,
 // данные на вход передаются при добавлении обработчика клика на фотографию
 // при создании экземпляра карточки, по этому ему нужно передать эту функцию в коструктор Card
 function handleCardClick(name, link, alt) {
+  photoPopup.setEventListeners();
   // Передаём информацию о картинке из класса Card
-  const photoPopup = new PopupWithImage({ popupSelector: popupCardPhoto }, name, link, alt);
-  photoPopup.open();
+  photoPopup.open(name, link, alt);
 };
 
 function openUserPopup() {
   const profile = userInfo.getUserInfo();
   nameInput.value = profile.name;
   jobInput.value = profile.description;
-  PopupWithUserForm.open()
+  popupWithUserForm.open()
 }
 
 function openNewCardPopup() {
   newPlaceFormValidator.resetValidation();
-  PopupWithCardForm.open()
+  popupWithCardForm.open()
 }
 
 //For Username form

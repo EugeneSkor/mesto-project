@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // подклю
 
 module.exports = {
   entry: {
-    main: './src/index.js' // указали в какой файл будет собираться весь js и дали ему имя
+    main: './src/pages/index.js' // указали в какой файл будет собираться весь js и дали ему имя
   },
   output: {
     path: path.resolve(__dirname, 'dist'), // __dirname - корневая директория где лежит файл webpack.config, от неё рассчитываются относительные пути
