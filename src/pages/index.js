@@ -61,22 +61,6 @@ popupWithUserForm.setEventListeners();
 
 // Add new card
 
-/*const popupWithCardForm = new PopupWithForm({
-  popupSelector: '#popupNewCard',
-    // Передаём в обработчик сгенерированный массив зачений полей
-    handleFormSubmit: (inputs) => {
-      const newCustomCard = new Section({
-        // Для создания карчточки используем значения из полей
-        items: [inputs],
-        renderer: (item) => {
-          newCustomCard.addItem(createCard(item));
-        }
-      }, ".elements__grid");
-    // Отображаем карточку на странице
-    newCustomCard.renderItems();
-  }
-});*/
-
 const popupWithCardForm = new PopupWithForm({
   popupSelector: '#popupNewCard',
     // Передаём в обработчик сгенерированный массив зачений полей
