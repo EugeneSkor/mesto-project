@@ -73,6 +73,7 @@ const popupWithCardForm = new PopupWithForm({
 popupWithCardForm.setEventListeners();
 
 const photoPopup = new PopupWithImage({ popupSelector: '#popupCardPhoto' });
+photoPopup.setEventListeners();
 
 // Запускаем рендер карточек
 cardList.renderItems();
@@ -81,7 +82,6 @@ cardList.renderItems();
 // данные на вход передаются при добавлении обработчика клика на фотографию
 // при создании экземпляра карточки, по этому ему нужно передать эту функцию в коструктор Card
 function handleCardClick(name, link, alt) {
-  photoPopup.setEventListeners();
   // Передаём информацию о картинке из класса Card
   photoPopup.open(name, link, alt);
 };

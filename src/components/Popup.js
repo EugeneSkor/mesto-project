@@ -1,21 +1,19 @@
 export default class Popup {
   constructor(popupSelector) {
-    this._popupSelector = document.querySelector(popupSelector);
+    this._popup = document.querySelector(popupSelector);
+    // Привязываем функцию удаления к контексту this, чтобы передавать передавать обработчику функцию без потери контекста.
+    this._handleEscClose = this._handleEscClose.bind(this)
   }
 
   open() {
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    });
-    this._popupSelector.classList.add('popup_opened');
+    document.addEventListener('keydown', this._handleEscClose);
+    this._popup.classList.add('popup_opened');
 
   }
 
   close() {
-    document.removeEventListener('keydown', (evt) => {
-      this._handleEscClose(evt);
-    });
-    this._popupSelector.classList.remove('popup_opened');
+    document.removeEventListener('keydown', this._handleEscClose);
+    this._popup.classList.remove('popup_opened');
 
   }
 

@@ -47,7 +47,8 @@ export default class Card {
 
     _deleteCard() {
       // Обработчик Del
-      this._deleteButton.closest('.element').remove();
+      this._element.remove();
+      this._element = null;
     }
 
     _handleImageClick() {
