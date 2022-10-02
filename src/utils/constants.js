@@ -1,31 +1,4 @@
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
-export const reverseInitialCards = initialCards.reverse();
+export const avatarEditButton = document.querySelector('.profile__button-edit-avatar');
 
 // User info popup
 
@@ -39,7 +12,16 @@ export const jobInput = document.querySelector('#formFildAbout');
 // For new card popup
 
 export const addCardButton = document.querySelector('.profile__button-add');
-
 export const newCardform = document.forms.newPlace;
+export const avatarForm = document.forms.changeAvatar;
+/*export default initialCards*/
 
-export default initialCards
+// For API
+
+export const token = {
+    baseUrl: "https://nomoreparties.co/v1/cohort-50/",
+    headers: {
+      authorization: "f77f36fa-4a8e-4899-a241-95c17d5f11a0",
+      "Content-Type": "application/json",
+    }
+  };

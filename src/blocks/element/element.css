@@ -4,6 +4,6 @@
  width: 282px;
  background-color: #fff;
  grid-template-columns: 220px 62px;
- grid-template-rows: 282px 80px;
+ grid-template-rows: 282px 40px 40px;
  border-radius: 10px;
 }

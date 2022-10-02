@@ -1,8 +1,10 @@
 .element__icon {
-  margin: 30px 20px;
+  margin: 23px 20px 0 20px;
+  width: 22px;
+  height: 19px;
   opacity: 1;
   transition: opacity 0.3s ease;
-  background: url(../../../images/elements/heart_disabled.svg) center no-repeat;
+  background: url(../../../images/elements/heart_disabled.svg) no-repeat;
 }
 
 .element__icon:hover {
