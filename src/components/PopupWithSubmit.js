@@ -7,9 +7,9 @@ export default class PopupWithSubmit extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
-  open(id) {
+  open(id, cardObject) {
     this._id = id;
-    console.log(this._id)
+    this._cardObject = cardObject;
     super.open();
   }
 
@@ -19,8 +19,8 @@ export default class PopupWithSubmit extends Popup {
     this._popupForm.addEventListener('submit', (evt) => {
       // отменим стандартное поведение
       evt.preventDefault();
-      // возвращаем функции id карточки для удаления
-      this._handleFormSubmit(this._id);
+      // возвращаем функции id карточки и карточку из DOM для удаления
+      this._handleFormSubmit(this._id, this._cardObject);
       super.close();
     });
   }

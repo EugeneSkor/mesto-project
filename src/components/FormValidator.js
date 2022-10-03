@@ -87,10 +87,13 @@ export class FormValidator {
     _hideInputError(inputElement) {
       inputElement.classList.remove(this._inputErrorClass);
       const errorElement = this._formSelector.querySelector(`.${inputElement.id}-error`);
-      // Скрываем сообщение об ошибке
-      errorElement.classList.remove(this._errorClass);
-      // Очистим ошибку
-      errorElement.textContent = '';
+      // Если в форме есть элемент с ошибкой
+      if (errorElement) {
+        // Скрываем сообщение об ошибке
+        errorElement.classList.remove(this._errorClass);
+        // Очистим ошибку
+        errorElement.textContent = '';
+      }
     }
 
     // Метод добавления класса с ошибкой

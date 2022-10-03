@@ -88,7 +88,11 @@ const popupWithUserForm = new PopupWithForm({
       })
       .catch(err => console.log(err))
       // Меняем текст на исходный после загрузки
-      .finally(() => {popupWithUserForm.setLoadButton(false)});
+      .finally(() => {
+        popupWithUserForm.setLoadButton(false)
+        popupWithUserForm.close();
+
+});
     }
 });
 
@@ -109,7 +113,9 @@ const popupWithCardForm = new PopupWithForm({
       })
       .catch(err => console.log(err))
       // Меняем текст на исходный после загрузки
-      .finally(() => {popupWithCardForm.setLoadButton(false)});
+      .finally(() => {
+        popupWithCardForm.setLoadButton(false)
+        popupWithCardForm.close()});
     }
 });
 
@@ -118,27 +124,36 @@ popupWithCardForm.setEventListeners();
 // Удалить карточку
 const delPopup = new PopupWithSubmit ({
   popupSelector: '#popupDelConfirmation',
-  handleFormSubmit: (id) => {
+  handleFormSubmit: (id, cardObject) => {
     // Отправляем на сервер id карточки для удаления
-    api.delCard(id)
+    return api.delCard(id)
+    .then(() => cardObject._deleteCard())
     .catch(err => console.log(err));
   }
 });
 
-function delCardClick(id) {
-  delPopup.open(id);
+function delCardClick(id, cardObject) {
+  delPopup.open(id, cardObject);
 };
 
 delPopup.setEventListeners();
 
 // Лайк
-function handleLikeClick(like, id) {
+function handleLikeClick(like, id, objectCard) {
   if (like) {
     api.addLike(id)
-    .catch(err => console.log(err));
+    // Отдаём ответ сервера на обновление количества лайков
+    .then((result) => objectCard.setLikeCount(result.likes.length))
+    //.then(() => objectCard.toggleLike())
+    .catch(err => console.log(err))
+    .finally(() => {
+      objectCard.toggleLike()})
   } else {
     api.delLike(id)
-    .catch(err => console.log(err));
+    .then((result) => objectCard.setLikeCount(result.likes.length))
+    .catch(err => console.log(err))
+    .finally(() => {
+      objectCard.toggleLike()});
   };
 };
 
@@ -188,7 +203,9 @@ const avatarPopup = new PopupWithForm({
       })
       .catch(err => console.log(err))
       // Меняем текст на исходный после загрузки
-      .finally(() => {avatarPopup.setLoadButton(false)});
+      .finally(() => {
+        avatarPopup.setLoadButton(false)
+        avatarPopup.close()});
     }
 });
 

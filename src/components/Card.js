@@ -34,6 +34,7 @@ export default class Card {
       this._element.querySelector('.element__title').textContent = this._name;
       this._likeCount = this._element.querySelector('.element__counter')
       this._likeCount.textContent = this._likes.length;
+
       // Если не совпадает ID пользователя и ID карточки - скрываем иконку корзины
       if (this._userId === this._ownerId) {
         this._deleteButton.classList.add("element__basket_visible");
@@ -41,13 +42,22 @@ export default class Card {
         this._deleteButton.classList.remove("element__basket_visible");
       }
 
+      // Если в объекте лайка (?. - на любом уровне вложения) есть лайк - отображаем лайк
+      if (this._likes?.some((like) => like._id === this._userId)) {
+        this._like.classList.add('element__icon_active')
+      }
+
       return this._element;
+    }
+
+    setLikeCount (likeNumber) {
+      this._likeCount.textContent = likeNumber;
     }
 
      _setEventListeners() {
       // Добавляем слушатель Like
       this._like = this._element.querySelector('.element__icon')
-      this._like.addEventListener('click', evt => this._toggleLike(evt));
+      this._like.addEventListener('click', evt => this._likeCheck(evt));
       // Добавляем слушатель Del
       //this._deleteButton = this._element.querySelector('.element__basket');
       //this._deleteButton.addEventListener('click', () => this._deleteCard());
@@ -56,18 +66,17 @@ export default class Card {
       this._handleDelCardClick();
     }
 
-    _toggleLike(evt) {
+    toggleLike() {
       // Обработчик Like
-        evt.target.classList.toggle('element__icon_active');
-        this._likeCheck()
+      this._like.classList.toggle('element__icon_active');
     }
 
     _likeCheck() {
       // Если лайк до нажатия не был активен отправляем на сервер
       if (this._like.classList.contains('element__icon_active'))
-        return this._handleLikeClick(true, this._cardId);
+        return this._handleLikeClick(false, this._cardId, this);
       //  Если лайк до нажатия был активен удаляем
-      else return this._handleLikeClick(false, this._cardId);
+      else return this._handleLikeClick(true, this._cardId, this);
     }
 
 
@@ -76,10 +85,8 @@ export default class Card {
       this._deleteButton = this._element.querySelector('.element__basket');
       // При клике активируем фунцию открытия попапа с подтверждением
       this._deleteButton.addEventListener('click', () => {
-        // Передаём в неё Id карточки
-        this._delCardClick(this._cardId)
-
-        console.log(this._cardId)
+        // Передаём в неё Id карточки и объект карточки для удаления из DOM
+        this._delCardClick(this._cardId, this)
       })
     }
 
