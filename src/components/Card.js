@@ -58,10 +58,7 @@ export default class Card {
       // Добавляем слушатель Like
       this._like = this._element.querySelector('.element__icon')
       this._like.addEventListener('click', evt => this._likeCheck(evt));
-      // Добавляем слушатель Del
-      //this._deleteButton = this._element.querySelector('.element__basket');
-      //this._deleteButton.addEventListener('click', () => this._deleteCard());
-
+     
       this._handleImageClick();
       this._handleDelCardClick();
     }
@@ -90,7 +87,7 @@ export default class Card {
       })
     }
 
-    _deleteCard() {
+    deleteCard() {
       // Обработчик Del
       this._element.remove();
       // занулить элемент, чтобы он удалился не только из разметки, но и не загружал оперативную память

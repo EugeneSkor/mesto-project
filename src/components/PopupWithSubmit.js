@@ -21,7 +21,6 @@ export default class PopupWithSubmit extends Popup {
       evt.preventDefault();
       // возвращаем функции id карточки и карточку из DOM для удаления
       this._handleFormSubmit(this._id, this._cardObject);
-      super.close();
     });
   }
 

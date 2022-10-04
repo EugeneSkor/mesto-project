@@ -86,13 +86,11 @@ const popupWithUserForm = new PopupWithForm({
         // Добавляем на страницу изменённые данные пользователя, которые перезаписались на сервере
         userInfo.setUserInfo(data);
       })
+      .then(() => {popupWithUserForm.close()})
       .catch(err => console.log(err))
       // Меняем текст на исходный после загрузки
       .finally(() => {
-        popupWithUserForm.setLoadButton(false)
-        popupWithUserForm.close();
-
-});
+        popupWithUserForm.setLoadButton(false)});
     }
 });
 
@@ -111,11 +109,11 @@ const popupWithCardForm = new PopupWithForm({
       // инстанцируем карточку с данными, вернувшимися с сервера и отображаем на странице
       cardList.addItem(createCard(data));
       })
+      .then(() => {popupWithCardForm.close()})
       .catch(err => console.log(err))
       // Меняем текст на исходный после загрузки
       .finally(() => {
-        popupWithCardForm.setLoadButton(false)
-        popupWithCardForm.close()});
+        popupWithCardForm.setLoadButton(false)});
     }
 });
 
@@ -127,7 +125,8 @@ const delPopup = new PopupWithSubmit ({
   handleFormSubmit: (id, cardObject) => {
     // Отправляем на сервер id карточки для удаления
     return api.delCard(id)
-    .then(() => cardObject._deleteCard())
+    .then(() => cardObject.deleteCard())
+    .then(() => delPopup.close())
     .catch(err => console.log(err));
   }
 });
@@ -144,16 +143,13 @@ function handleLikeClick(like, id, objectCard) {
     api.addLike(id)
     // Отдаём ответ сервера на обновление количества лайков
     .then((result) => objectCard.setLikeCount(result.likes.length))
-    //.then(() => objectCard.toggleLike())
+    .then(() => objectCard.toggleLike())
     .catch(err => console.log(err))
-    .finally(() => {
-      objectCard.toggleLike()})
   } else {
     api.delLike(id)
     .then((result) => objectCard.setLikeCount(result.likes.length))
+    .then(() => objectCard.toggleLike())
     .catch(err => console.log(err))
-    .finally(() => {
-      objectCard.toggleLike()});
   };
 };
 
@@ -204,8 +200,7 @@ const avatarPopup = new PopupWithForm({
       .catch(err => console.log(err))
       // Меняем текст на исходный после загрузки
       .finally(() => {
-        avatarPopup.setLoadButton(false)
-        avatarPopup.close()});
+        avatarPopup.setLoadButton(false)});
     }
 });
 
